@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SubmissionForm } from '../components/SubmissionForm';
 import { FishPondCanvas } from '../components/FishPondCanvas';
-import { Sparkles, Shield } from 'lucide-react';
+import { Sparkles, Shield, Copy, Check } from 'lucide-react';
 
 export const SubmitPage: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#020d1c] text-slate-100 overflow-x-hidden relative">
       <Header />
@@ -21,7 +30,7 @@ export const SubmitPage: React.FC = () => {
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Public Submission Link</span>
+            <span>Public Submission Link: /submit</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight uppercase">
             SUBMIT A FRESHERS DARE
@@ -29,6 +38,17 @@ export const SubmitPage: React.FC = () => {
           <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-lg mx-auto">
             Got an unforgettable dare or funny challenge for your classmates or juniors? Drop it into the pond now!
           </p>
+
+          {/* Quick Copy Link Pill */}
+          <div className="mt-4 flex items-center justify-center">
+            <button
+              onClick={handleCopy}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel hover:bg-slate-800/80 border border-cyan-400/30 text-xs font-semibold text-cyan-300 cursor-pointer transition-all shadow-sm"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Link Copied to Clipboard!' : 'Copy Shareable Submission Link'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Submission Form Component */}
