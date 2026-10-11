@@ -8,11 +8,9 @@ export const Header: React.FC = () => {
   const { isAdmin } = useAdminAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // If in pure auditorium mode, header can be minimized or hidden by the pond page
   const navLinks = [
     { to: '/', label: 'Home', icon: Waves },
     { to: '/submit', label: 'Submit a Challenge', icon: Send },
-    { to: '/pond', label: 'Play Fish Pond', icon: Fish, highlight: true },
     {
       to: isAdmin ? '/admin/dashboard' : '/admin/login',
       label: isAdmin ? 'Dashboard' : 'Admin Login',
@@ -44,20 +42,6 @@ export const Header: React.FC = () => {
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = location.pathname === link.to;
-
-              if (link.highlight) {
-                return (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="relative ml-2 px-5 py-2.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] hover:scale-105 flex items-center gap-2"
-                  >
-                    <Icon className="w-4 h-4 stroke-[2.5]" />
-                    <span>{link.label}</span>
-                    <span className="text-sm">🎣</span>
-                  </Link>
-                );
-              }
 
               return (
                 <Link
