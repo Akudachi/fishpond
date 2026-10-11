@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
   Search, 
   RefreshCw, 
@@ -7,7 +7,9 @@ import {
   ChevronLeft, 
   ChevronRight, 
   CheckCircle2, 
-  AlertCircle
+  AlertCircle,
+  Fish,
+  ExternalLink
 } from 'lucide-react';
 import { useAdminAuth } from '../hooks/useAdminAuth';
 import { useChallenges, useEventSettings } from '../hooks/useChallenges';
@@ -86,6 +88,32 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
       )}
 
+      {/* Top Admin Header Bar with prominent PLAY POND button */}
+      <header className="w-full glass-panel border-b border-cyan-500/20 px-4 sm:px-8 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-cyan-500/20 flex items-center justify-center border border-cyan-400/30">
+              <Fish className="w-5 h-5 text-cyan-400" />
+            </div>
+            <span className="font-bold text-sm tracking-wide text-white hidden sm:inline">
+              Freshers Fish Pond Console
+            </span>
+          </Link>
+        </div>
+
+        {/* Prominent Play Pond Button */}
+        <div className="flex items-center gap-3">
+          <Link
+            to="/pond"
+            className="px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all shadow-md shadow-cyan-500/30 flex items-center gap-2 transform hover:scale-105 active:scale-95"
+          >
+            <Fish className="w-4 h-4 stroke-[2.5]" />
+            <span>Play Fish Pond</span>
+            <span className="text-base">🎣</span>
+          </Link>
+        </div>
+      </header>
+
       {/* Main Dashboard Container */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 flex flex-col lg:flex-row gap-8">
         {/* Admin Sidebar */}
@@ -147,7 +175,7 @@ export const AdminDashboardPage: React.FC = () => {
               />
             </div>
 
-            {/* Manual Refresh */}
+            {/* Manual Refresh & Quick Pond launch */}
             <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
               <button
                 onClick={async () => {
@@ -160,6 +188,17 @@ export const AdminDashboardPage: React.FC = () => {
                 <RefreshCw className={`w-3.5 h-3.5 ${isDataLoading ? 'animate-spin' : ''}`} />
                 <span className="hidden sm:inline">Refresh</span>
               </button>
+
+              <Link
+                to="/pond"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold flex items-center gap-1.5 transition-all"
+                title="Open live pond in new tab"
+              >
+                <span>Auditorium Pond</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
 

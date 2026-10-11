@@ -1,73 +1,48 @@
-import React, { useState } from 'react';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { SubmissionForm } from '../components/SubmissionForm';
 import { FishPondCanvas } from '../components/FishPondCanvas';
-import { Sparkles, Shield, Copy, Check } from 'lucide-react';
+import { Shield } from 'lucide-react';
+import { useAdminAuth } from '../hooks/useAdminAuth';
 
 export const SubmitPage: React.FC = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
-  };
+  const { isAdmin } = useAdminAuth();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#020d1c] text-slate-100 overflow-x-hidden relative">
-      <Header />
-
-      {/* Subtle background canvas ripples */}
+    <div className="min-h-screen flex flex-col justify-between bg-[#020d1c] text-slate-100 overflow-x-hidden relative p-4 sm:p-6 md:p-10">
+      {/* Ambient background canvas ripples */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
         <FishPondCanvas />
-        <div className="absolute inset-0 bg-[#020d1c]/70 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-[#020d1c]/75 backdrop-blur-[2px]" />
       </div>
 
-      <main className="relative z-10 flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full flex flex-col justify-center">
-        {/* Intro Tag */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Public Submission Link: /submit</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight uppercase">
-            SUBMIT A FRESHERS DARE
-          </h1>
-          <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-lg mx-auto">
-            Got an unforgettable dare or funny challenge for your classmates or juniors? Drop it into the pond now!
-          </p>
+      {/* Top Brand Tag */}
+      <header className="relative z-10 w-full max-w-2xl mx-auto flex items-center justify-between pt-2 pb-6">
+        <Link to="/" className="text-xs font-bold text-cyan-300/80 hover:text-cyan-200 transition-colors uppercase tracking-wider flex items-center gap-1.5">
+          <span>Freshers Fish Pond</span>
+        </Link>
+        <span className="text-[11px] font-semibold text-slate-400 bg-slate-900/60 px-2.5 py-0.5 rounded-full border border-slate-800">
+          Student Portal
+        </span>
+      </header>
 
-          {/* Quick Copy Link Pill */}
-          <div className="mt-4 flex items-center justify-center">
-            <button
-              onClick={handleCopy}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel hover:bg-slate-800/80 border border-cyan-400/30 text-xs font-semibold text-cyan-300 cursor-pointer transition-all shadow-sm"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Link Copied to Clipboard!' : 'Copy Shareable Submission Link'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Submission Form Component */}
-        <SubmissionForm />
-
-        {/* Community guidelines note */}
-        <div className="mt-10 p-5 rounded-2xl glass-panel border border-cyan-500/20 max-w-2xl mx-auto text-xs text-slate-300 flex items-start gap-3">
-          <Shield className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-          <div>
-            <span className="font-bold text-white block mb-0.5">Friendly Event Guidelines</span>
-            <p className="leading-relaxed">
-              Please submit challenges that are lighthearted, respectful, and enjoyable for everyone in the auditorium. 
-              The admin team reviews each submission prior to stage display. Vulgar, offensive, or unsafe entries will be removed.
-            </p>
-          </div>
+      {/* Main Submission Form Container */}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-2xl mx-auto w-full py-4">
+        <div className="w-full">
+          <SubmissionForm />
         </div>
       </main>
 
-      <Footer />
+      {/* Discreet bottom admin link */}
+      <footer className="relative z-10 w-full max-w-2xl mx-auto pt-8 pb-4 flex items-center justify-center text-xs">
+        <Link
+          to={isAdmin ? '/admin/dashboard' : '/admin/login'}
+          className="text-slate-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-slate-900/40"
+        >
+          <Shield className="w-3.5 h-3.5 text-cyan-500/70" />
+          <span>{isAdmin ? 'Admin Dashboard' : 'Admin Login'}</span>
+        </Link>
+      </footer>
     </div>
   );
 };
