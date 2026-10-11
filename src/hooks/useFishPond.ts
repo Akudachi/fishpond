@@ -3,6 +3,11 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { storageFallback } from '../lib/storageFallback';
 import type { PublicApprovedChallenge } from '../types/challenge';
 import { sounds } from '../lib/soundEffects';
+import {
+  getCaughtChallengeIds,
+  saveCaughtChallengeId,
+  resetAllCaughtChallengeIds,
+} from '../lib/caughtChallenges';
 
 export type GamePhase = 'idle' | 'hooking' | 'caught' | 'revealed';
 
@@ -34,15 +39,16 @@ export function useFishPond() {
     sounds.setMuted(!soundEnabled);
   }, [soundEnabled]);
 
-  // Load eligible approved challenges
+  // Load eligible approved challenges (guaranteeing that caught/shown dares are excluded)
   const fetchApprovedPool = useCallback(async () => {
     setIsLoadingPool(true);
     setError(null);
+    const caughtSet = getCaughtChallengeIds();
 
     if (!isSupabaseConfigured) {
       const all = storageFallback.getChallenges();
       const approvedOnly = all
-        .filter((c) => c.status === 'approved')
+        .filter((c) => c.status === 'approved' && !caughtSet.has(c.id))
         .map((c) => ({
           id: c.id,
           student_name: c.student_name,
@@ -62,7 +68,9 @@ export function useFishPond() {
         .eq('status', 'approved');
 
       if (err) throw err;
-      setApprovedChallenges(data || []);
+      // Filter out any challenges that have already been caught / displayed on stage
+      const remainingPool = ((data || []) as PublicApprovedChallenge[]).filter((c) => !caughtSet.has(c.id));
+      setApprovedChallenges(remainingPool);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load approved challenges.');
     } finally {
@@ -129,7 +137,10 @@ export function useFishPond() {
         // IMMEDIATELY REMOVE THIS DARE FROM THE ACTIVE POND POOL
         setApprovedChallenges((prev) => prev.filter((c) => c.id !== chosen.id));
 
-        // Persist removal from the live pond
+        // Persist to caught storage so it is excluded permanently from all future pool refreshes
+        saveCaughtChallengeId(chosen.id);
+
+        // Also attempt database/storage sync
         try {
           if (!isSupabaseConfigured) {
             storageFallback.markChallengeCaught(chosen.id);
@@ -137,7 +148,7 @@ export function useFishPond() {
             await supabase.rpc('mark_challenge_caught', { challenge_id: chosen.id });
           }
         } catch (err) {
-          console.error('Error removing caught challenge from pond:', err);
+          console.warn('Database caught status update:', err);
         }
       }, 700);
     }, 2100);
@@ -153,9 +164,15 @@ export function useFishPond() {
     if (soundEnabled) {
       sounds.playBubblePop();
     }
-    // Refresh pool in background to catch any newly approved challenges
+    // Refresh pool in background to catch any newly approved challenges (excluding caught ones)
     fetchApprovedPool();
   }, [soundEnabled, fetchApprovedPool]);
+
+  // Reset all caught challenges back into the pond
+  const resetCaughtPool = useCallback(() => {
+    resetAllCaughtChallengeIds();
+    fetchApprovedPool();
+  }, [fetchApprovedPool]);
 
   const toggleSound = () => {
     setSoundEnabled((prev) => !prev);
@@ -185,6 +202,7 @@ export function useFishPond() {
     targetFishIndex,
     catchFish,
     resetRound,
+    resetCaughtPool,
     toggleSound,
     refreshPool: fetchApprovedPool,
   };

@@ -131,10 +131,11 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
             {/* Delete Button */}
             <button
               onClick={() => setShowDeleteConfirm(true)}
-              className="p-2 rounded-lg bg-slate-800/80 hover:bg-rose-900/40 text-slate-400 hover:text-rose-300 transition-colors cursor-pointer text-xs flex items-center gap-1"
-              title="Delete challenge"
+              className="px-2.5 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 hover:text-rose-200 border border-rose-500/30 transition-colors cursor-pointer text-xs flex items-center gap-1.5 font-semibold"
+              title="Delete dare permanently"
             >
-              <Trash2 className="w-3.5 h-3.5" />
+              <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+              <span>Delete</span>
             </button>
           </div>
 

@@ -20,8 +20,8 @@ export const PondPage: React.FC = () => {
     targetFishIndex,
     catchFish,
     resetRound,
+    resetCaughtPool,
     toggleSound,
-    refreshPool,
   } = useFishPond();
 
   const { settings } = useEventSettings();
@@ -197,25 +197,25 @@ export const PondPage: React.FC = () => {
               <Fish className="w-6 h-6 sm:w-8 sm:h-8 text-amber-300" />
             </div>
             <h3 className="text-lg sm:text-2xl font-black text-white mb-2">
-              THE POND IS WAITING FOR FISH!
+              ALL CAUGHT OR WAITING FOR FISH! 🎣
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm mb-5 leading-relaxed">
-              Ask the admin to approve some challenges before playing. New submissions must be verified first.
+              Dares are removed from the pond once displayed. You can reset the caught dares for another round or ask the admin to approve new submissions.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+              <button
+                onClick={resetCaughtPool}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 text-slate-950 hover:opacity-90 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shadow-cyan-500/20"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Reset Caught Dares</span>
+              </button>
               <Link
                 to="/submit"
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition-all cursor-pointer"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all cursor-pointer"
               >
                 Submit A Dare
               </Link>
-              <button
-                onClick={refreshPool}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                <span>Check Again</span>
-              </button>
             </div>
           </motion.div>
         ) : (

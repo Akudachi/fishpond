@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Sparkles, User, HelpCircle } from 'lucide-react';
 import { useSubmitChallenge } from '../hooks/useChallenges';
+import { SubmissionCountdown } from './SubmissionCountdown';
 
 export const SubmissionForm: React.FC = () => {
   const [studentName, setStudentName] = useState('');
   const [challengeText, setChallengeText] = useState('');
+  const [isExpired, setIsExpired] = useState(false);
 
   const { submit, isSubmitting, submissionSuccess, error, resetStatus } = useSubmitChallenge();
 
@@ -14,7 +16,7 @@ export const SubmissionForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmitting || isExpired) return;
 
     const res = await submit({
       student_name: studentName,
@@ -84,6 +86,9 @@ export const SubmissionForm: React.FC = () => {
               </p>
             </div>
 
+            {/* Countdown timer ending 11:00 PM on 12th October 2026 */}
+            <SubmissionCountdown onExpiredChange={setIsExpired} />
+
             {error && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -108,12 +113,13 @@ export const SubmissionForm: React.FC = () => {
                 <input
                   type="text"
                   required
+                  disabled={isExpired}
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
                   placeholder="e.g. Rahul / Sneha (CS Dept)"
                   minLength={2}
                   maxLength={60}
-                  className="w-full px-4 py-3.5 rounded-xl glass-input text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-cyan-400"
+                  className="w-full px-4 py-3.5 rounded-xl glass-input text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -137,9 +143,10 @@ export const SubmissionForm: React.FC = () => {
                   onChange={(e) => setChallengeText(e.target.value)}
                   rows={4}
                   required
+                  disabled={isExpired}
                   placeholder="Example: Ask Adarsh to perform a hook step from his favourite movie song on stage!"
                   maxLength={250}
-                  className="w-full px-4 py-3.5 rounded-xl glass-input text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-cyan-400 resize-none"
+                  className="w-full px-4 py-3.5 rounded-xl glass-input text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-cyan-400 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 />
                 <p className="mt-1.5 text-xs text-slate-400">
                   Keep it funny, respectful, and entertaining for the whole auditorium!
@@ -149,7 +156,7 @@ export const SubmissionForm: React.FC = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting || !studentName.trim() || charCount < 5 || isOverLimit}
+                disabled={isSubmitting || isExpired || !studentName.trim() || charCount < 5 || isOverLimit}
                 className="w-full py-4 px-6 rounded-2xl font-black text-base text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[0_0_25px_rgba(6,182,212,0.5)] cursor-pointer flex items-center justify-center gap-2 transform active:scale-98"
               >
                 {isSubmitting ? (
@@ -157,6 +164,8 @@ export const SubmissionForm: React.FC = () => {
                     <div className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
                     <span>Sending into Pond...</span>
                   </>
+                ) : isExpired ? (
+                  <span>Submissions Closed 🔒</span>
                 ) : (
                   <>
                     <Send className="w-5 h-5 stroke-[2.5]" />

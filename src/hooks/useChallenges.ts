@@ -3,6 +3,7 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { storageFallback } from '../lib/storageFallback';
 import type { Challenge, EventSettings } from '../types/challenge';
 import { validateChallengeSubmission } from '../lib/validation';
+import { removeCaughtChallengeId } from '../lib/caughtChallenges';
 
 export function useChallenges() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
@@ -93,6 +94,9 @@ export function useChallenges() {
   // Actions
   const approveChallenge = async (id: string): Promise<boolean> => {
     try {
+      // If challenge was previously caught, un-block it so it can re-enter the pond
+      removeCaughtChallengeId(id);
+
       if (!isSupabaseConfigured) {
         storageFallback.updateChallengeStatus(id, 'approved');
         setChallenges(storageFallback.getChallenges());

@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Fish, Send, Waves, ShieldCheck, Menu, X } from 'lucide-react';
-import { useAdminAuth } from '../hooks/useAdminAuth';
+import { Fish, Send, Waves, Menu, X } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const location = useLocation();
-  const { isAdmin } = useAdminAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { to: '/', label: 'Home', icon: Waves },
     { to: '/submit', label: 'Submit a Challenge', icon: Send },
-    {
-      to: isAdmin ? '/admin/dashboard' : '/admin/login',
-      label: isAdmin ? 'Dashboard' : 'Admin Login',
-      icon: ShieldCheck,
-    },
   ];
 
   return (
