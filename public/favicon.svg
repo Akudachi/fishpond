@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="fishGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+  </defs>
+  <!-- Fish Body -->
+  <path d="M48 32 C38 18 18 20 8 32 C18 44 38 46 48 32 Z" fill="url(#fishGrad)" />
+  <!-- Tail -->
+  <path d="M46 32 L58 20 L54 32 L58 44 Z" fill="#f97316" />
+  <!-- Fin -->
+  <path d="M28 23 C30 15 36 17 38 24 Z" fill="#38bdf8" />
+  <!-- Eye -->
+  <circle cx="18" cy="30" r="3.5" fill="#ffffff" />
+  <circle cx="17" cy="30" r="1.8" fill="#0f172a" />
+  <!-- Bubbles -->
+  <circle cx="6" cy="22" r="2" fill="#38bdf8" opacity="0.8" />
+  <circle cx="9" cy="14" r="3" fill="#38bdf8" opacity="0.6" />
+</svg>

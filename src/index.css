@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #030e1e;
+    color: #e2e8f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Custom ocean & underwater animation keyframes */
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(100vh) scale(0.6) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) scale(1) translateX(15px);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20px) scale(1.1) translateX(-15px);
+    opacity: 0;
+  }
+}
+
+@keyframes waterSway {
+  0%, 100% {
+    transform: rotate(0deg) skewX(0deg);
+  }
+  50% {
+    transform: rotate(4deg) skewX(3deg);
+  }
+}
+
+@keyframes lightCaustic {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(6, 182, 212, 0.7), 0 0 70px rgba(59, 130, 246, 0.4);
+  }
+}
+
+@keyframes hookDescend {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(30%);
+  }
+  75% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(-80%);
+  }
+}
+
+.animate-bubble-rise {
+  animation: bubbleFloat 8s infinite linear;
+}
+
+.animate-water-sway {
+  animation: waterSway 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-caustic {
+  animation: lightCaustic 7s ease-in-out infinite alternate;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(8, 28, 54, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+.glass-panel-glow {
+  background: rgba(10, 37, 72, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 40px -10px rgba(0, 195, 255, 0.25);
+}
+
+.glass-input {
+  background: rgba(4, 19, 39, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(8px);
+  color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  background: rgba(6, 26, 52, 0.8);
+}
+
+/* High contrast projector text utility */
+.projector-title {
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+.projector-card {
+  box-shadow: 0 0 60px rgba(6, 182, 212, 0.35), 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Custom scrollbars for dashboard and lists */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #031326;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0ea5e9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
