@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, Sparkles, User, HelpCircle, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Sparkles, User, HelpCircle } from 'lucide-react';
 import { useSubmitChallenge } from '../hooks/useChallenges';
-import { Link } from 'react-router-dom';
 
 export const SubmissionForm: React.FC = () => {
   const [studentName, setStudentName] = useState('');
@@ -54,22 +53,15 @@ export const SubmissionForm: React.FC = () => {
               Thanks for contributing! Your challenge will appear in the game only after admin approval.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* ONLY Submit Another Dare (Enter Pond link removed) */}
+            <div className="flex items-center justify-center">
               <button
                 onClick={resetStatus}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-slate-900 bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/30"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-900 bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95"
               >
                 <Sparkles className="w-5 h-5 text-slate-950" />
                 <span>Submit Another Dare</span>
               </button>
-
-              <Link
-                to="/pond"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600 transition-all flex items-center justify-center gap-2"
-              >
-                <span>Enter The Fish Pond</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
             </div>
           </motion.div>
         ) : (
