@@ -9,7 +9,7 @@ export const SubmitPage: React.FC = () => {
   const { isAdmin } = useAdminAuth();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#020d1c] text-slate-100 overflow-x-hidden relative p-4 sm:p-6 md:p-10">
+    <div className="min-h-screen flex flex-col justify-between bg-[#020d1c] text-slate-100 overflow-x-hidden relative p-3 sm:p-6 md:p-10">
       {/* Ambient background canvas ripples */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
         <FishPondCanvas />
@@ -17,11 +17,11 @@ export const SubmitPage: React.FC = () => {
       </div>
 
       {/* Top Brand Tag */}
-      <header className="relative z-10 w-full max-w-2xl mx-auto flex items-center justify-between pt-2 pb-6">
+      <header className="relative z-10 w-full max-w-2xl mx-auto flex items-center justify-between pt-1 sm:pt-2 pb-4 sm:pb-6">
         <Link to="/" className="text-xs font-bold text-cyan-300/80 hover:text-cyan-200 transition-colors uppercase tracking-wider flex items-center gap-1.5">
           <span>Freshers Fish Pond</span>
         </Link>
-        <span className="text-[11px] font-semibold text-slate-400 bg-slate-900/60 px-2.5 py-0.5 rounded-full border border-slate-800">
+        <span className="text-[10px] sm:text-[11px] font-semibold text-slate-400 bg-slate-900/60 px-2.5 py-0.5 rounded-full border border-slate-800">
           Student Portal
         </span>
       </header>

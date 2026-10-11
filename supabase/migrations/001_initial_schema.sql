@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.challenges (
     student_name TEXT NOT NULL CHECK (char_length(trim(student_name)) > 0 AND char_length(student_name) <= 60),
     challenge_text TEXT NOT NULL CHECK (char_length(trim(challenge_text)) > 0 AND char_length(challenge_text) <= 250),
     category TEXT DEFAULT 'General Dare',
-    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected', 'completed')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
     reviewed_at TIMESTAMP WITH TIME ZONE,

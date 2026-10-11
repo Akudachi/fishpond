@@ -56,15 +56,15 @@ export const ChallengeReveal: React.FC<ChallengeRevealProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-slate-950/80 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-md">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 30 }}
+          initial={{ opacity: 0, scale: 0.85, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.85, y: 20 }}
           transition={{ type: 'spring', damping: 20, stiffness: 260 }}
           className={`w-full ${
             isPresentationMode ? 'max-w-5xl' : 'max-w-3xl'
-          } rounded-3xl p-6 md:p-12 relative overflow-hidden text-center projector-card border-2 border-cyan-400/60 bg-gradient-to-b from-[#0a2347] via-[#051833] to-[#030e1f] shadow-[0_0_80px_rgba(6,182,212,0.45)]`}
+          } max-h-[90dvh] overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 relative text-center projector-card border-2 border-cyan-400/60 bg-gradient-to-b from-[#0a2347] via-[#051833] to-[#030e1f] shadow-[0_0_80px_rgba(6,182,212,0.45)]`}
         >
           {/* Animated decorative water light caustics */}
           <div className="absolute -top-32 -left-32 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
@@ -75,31 +75,31 @@ export const ChallengeReveal: React.FC<ChallengeRevealProps> = ({
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.15, type: 'spring' }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-bold text-sm md:text-base tracking-wider uppercase mb-6 shadow-inner"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-bold text-[11px] sm:text-sm tracking-wider uppercase mb-3 sm:mb-6 shadow-inner"
           >
-            <Sparkles className="w-5 h-5 text-amber-300 animate-spin" />
-            <span>🎉 FISH CAUGHT! CHALLENGE REVEALED</span>
-            <Sparkles className="w-5 h-5 text-amber-300 animate-spin" />
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 animate-spin" />
+            <span>FISH CAUGHT! CHALLENGE REVEALED</span>
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 animate-spin" />
           </motion.div>
 
           {/* Submitter Name Badge */}
-          <div className="flex items-center justify-center mb-6">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm md:text-base font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 shadow-md">
-              <User className="w-4 h-4 text-amber-300" />
+          <div className="flex items-center justify-center mb-3 sm:mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 shadow-md">
+              <User className="w-3.5 h-3.5 text-amber-300" />
               <span>Submitted by: {challenge.student_name || 'Fresher'}</span>
             </span>
           </div>
 
-          {/* Main Challenge Text — Large & High Contrast for Projector / Auditorium */}
-          <div className="my-6 md:my-10 px-2 md:px-8">
+          {/* Main Challenge Text — Responsive typography */}
+          <div className="my-3 sm:my-8 px-1 sm:px-6">
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
-              className={`font-black text-white leading-tight tracking-tight drop-shadow-lg projector-title ${
+              className={`font-black text-white leading-tight tracking-tight drop-shadow-lg projector-title break-words ${
                 isPresentationMode
-                  ? 'text-4xl md:text-6xl lg:text-7xl font-extrabold'
-                  : 'text-2xl md:text-4xl lg:text-5xl font-extrabold'
+                  ? 'text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold'
+                  : 'text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold'
               }`}
             >
               "{challenge.challenge_text}"
@@ -111,15 +111,15 @@ export const ChallengeReveal: React.FC<ChallengeRevealProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
-            className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="mt-5 sm:mt-10 flex items-center justify-center"
           >
             <button
               onClick={onNextFresher}
-              className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black text-lg md:text-2xl text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_35px_rgba(6,182,212,0.6)] cursor-pointer flex items-center justify-center gap-3"
+              className="w-full sm:w-auto px-5 sm:px-12 py-3.5 sm:py-5 rounded-2xl font-black text-sm sm:text-xl md:text-2xl text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_35px_rgba(6,182,212,0.6)] cursor-pointer flex items-center justify-center gap-2 sm:gap-3"
             >
-              <RotateCcw className="w-6 h-6 md:w-7 md:h-7 stroke-[2.5]" />
+              <RotateCcw className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.5]" />
               <span>NEXT FRESHER — CATCH AGAIN</span>
-              <span className="text-2xl">🎣</span>
+              <span className="text-lg sm:text-2xl">🎣</span>
             </button>
           </motion.div>
         </motion.div>

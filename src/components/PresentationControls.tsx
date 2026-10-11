@@ -38,14 +38,14 @@ export const PresentationControls: React.FC<PresentationControlsProps> = ({
       <button
         onClick={onToggleFullscreen}
         title={isFullscreen ? 'Exit Presentation Mode' : 'Enter Auditorium Presentation Mode'}
-        className={`p-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 text-xs font-semibold ${
+        className={`p-2 sm:p-2.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 text-xs font-semibold ${
           isFullscreen
             ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-400/40'
             : 'bg-slate-800/60 text-slate-200 hover:bg-slate-800 border border-slate-700/50'
         }`}
       >
-        {isFullscreen ? <Minimize2 className="w-5 h-5 text-amber-300" /> : <Maximize2 className="w-5 h-5 text-cyan-300" />}
-        <span>{isFullscreen ? 'Exit Fullscreen' : 'Projector Mode'}</span>
+        {isFullscreen ? <Minimize2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" /> : <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-300" />}
+        <span className="hidden sm:inline">{isFullscreen ? 'Exit Fullscreen' : 'Projector Mode'}</span>
       </button>
     </div>
   );

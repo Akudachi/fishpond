@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, X, Edit2, Trash2, RotateCcw, User, Clock, AlertTriangle } from 'lucide-react';
+import { Check, X, Edit2, Trash2, RotateCcw, User, Clock, AlertTriangle, Fish } from 'lucide-react';
 import type { Challenge } from '../types/challenge';
 
 interface AdminChallengeCardProps {
@@ -27,7 +27,14 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
         return (
           <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Approved
+            In Pond (Active)
+          </span>
+        );
+      case 'completed':
+        return (
+          <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center gap-1">
+            <Fish className="w-3.5 h-3.5 text-cyan-400" />
+            Caught on Stage
           </span>
         );
       case 'rejected':
@@ -109,7 +116,7 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
         </div>
       ) : (
         /* Action buttons bar */
-        <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+        <div className="pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             {/* Edit Button */}
             <button
@@ -118,7 +125,7 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
               title="Edit challenge text"
             >
               <Edit2 className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Edit</span>
+              <span className="hidden xs:inline">Edit</span>
             </button>
 
             {/* Delete Button */}
@@ -131,11 +138,11 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {challenge.status === 'rejected' ? (
               <button
                 onClick={() => onRestore(challenge.id)}
-                className="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
+                className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Restore</span>
@@ -144,7 +151,7 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
               <>
                 <button
                   onClick={() => onReject(challenge.id)}
-                  className="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                  className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/40 text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
                 >
                   <X className="w-3.5 h-3.5" />
                   <span>Reject</span>
@@ -153,10 +160,10 @@ export const AdminChallengeCard: React.FC<AdminChallengeCardProps> = ({
                 {challenge.status !== 'approved' && (
                   <button
                     onClick={() => onApprove(challenge.id)}
-                    className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all shadow-md shadow-emerald-500/20 cursor-pointer flex items-center gap-1"
+                    className="px-3 sm:px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all shadow-md shadow-emerald-500/20 cursor-pointer flex items-center gap-1"
                   >
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
-                    <span>Approve</span>
+                    <span>{challenge.status === 'completed' ? 'Re-add to Pond' : 'Approve'}</span>
                   </button>
                 )}
               </>

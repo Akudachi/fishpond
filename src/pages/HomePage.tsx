@@ -12,7 +12,7 @@ export const HomePage: React.FC = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative flex-1 flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-20 min-h-[75vh]">
+      <section className="relative flex-1 flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 py-12 sm:py-20 min-h-[75vh]">
         {/* Live Canvas Underwater Background */}
         <div className="absolute inset-0 z-0">
           <FishPondCanvas className="w-full h-full opacity-85" />
@@ -25,18 +25,18 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel border border-cyan-400/40 text-cyan-300 font-bold text-xs sm:text-sm uppercase tracking-widest mb-6 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full glass-panel border border-cyan-400/40 text-cyan-300 font-bold text-[10px] sm:text-xs md:text-sm uppercase tracking-wider sm:tracking-widest mb-4 sm:mb-6 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
           >
-            <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 animate-spin" />
             <span>COLLEGE FRESHERS DAY LIVE EVENT</span>
-            <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 animate-spin" />
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-none uppercase mb-6 projector-title"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight sm:leading-none uppercase mb-4 sm:mb-6 projector-title px-1"
           >
             READY TO CATCH A{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-teal-200 to-amber-300">
@@ -49,7 +49,7 @@ export const HomePage: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-cyan-100/90 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow"
+            className="text-sm sm:text-lg md:text-xl lg:text-2xl text-cyan-100/90 max-w-2xl mx-auto font-medium leading-relaxed mb-8 sm:mb-10 drop-shadow px-2"
           >
             Students submit the dares. The admin approves them. Freshers discover surprise challenges live on stage!
           </motion.p>

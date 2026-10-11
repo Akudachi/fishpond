@@ -122,9 +122,23 @@ export function useFishPond() {
         sounds.playVictory();
       }
 
-      // Transition to PHASE 4 — CHALLENGE REVEAL
-      setTimeout(() => {
+      // Transition to PHASE 4 — CHALLENGE REVEAL (ONCE DISPLAYED, REMOVE FROM POND)
+      setTimeout(async () => {
         setPhase('revealed');
+
+        // IMMEDIATELY REMOVE THIS DARE FROM THE ACTIVE POND POOL
+        setApprovedChallenges((prev) => prev.filter((c) => c.id !== chosen.id));
+
+        // Persist removal from the live pond
+        try {
+          if (!isSupabaseConfigured) {
+            storageFallback.markChallengeCaught(chosen.id);
+          } else {
+            await supabase.rpc('mark_challenge_caught', { challenge_id: chosen.id });
+          }
+        } catch (err) {
+          console.error('Error removing caught challenge from pond:', err);
+        }
       }, 700);
     }, 2100);
   }, [phase, approvedChallenges, lastChallengeId, soundEnabled]);

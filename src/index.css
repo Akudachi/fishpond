@@ -125,6 +125,13 @@
   transition: all 0.2s ease;
 }
 
+/* Prevent iOS Safari auto-zoom on input focus by guaranteeing 16px font size on small viewports */
+@media (max-width: 640px) {
+  .glass-input {
+    font-size: 16px !important;
+  }
+}
+
 .glass-input:focus {
   outline: none;
   border-color: #38bdf8;
@@ -143,8 +150,8 @@
 
 /* Custom scrollbars for dashboard and lists */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -159,3 +166,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #38bdf8;
 }
+

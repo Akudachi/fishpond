@@ -8,7 +8,7 @@ export function useChallenges() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'approved' | 'completed' | 'rejected'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 8;
@@ -60,8 +60,9 @@ export function useChallenges() {
     const total = challenges.length;
     const pending = challenges.filter((c) => c.status === 'pending').length;
     const approved = challenges.filter((c) => c.status === 'approved').length;
+    const completed = challenges.filter((c) => c.status === 'completed').length;
     const rejected = challenges.filter((c) => c.status === 'rejected').length;
-    return { total, pending, approved, rejected };
+    return { total, pending, approved, completed, rejected };
   }, [challenges]);
 
   // Filtered and searched challenges (Category removed)

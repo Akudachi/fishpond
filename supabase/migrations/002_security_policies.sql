@@ -124,3 +124,21 @@ $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 -- Grant execution to public and authenticated
 GRANT EXECUTE ON FUNCTION public.get_random_approved_challenge(UUID) TO anon, authenticated;
+
+-- =========================================================================
+-- REMOVE CHALLENGE FROM POND ONCE CAUGHT
+-- =========================================================================
+
+CREATE OR REPLACE FUNCTION public.mark_challenge_caught(challenge_id UUID)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE public.challenges
+    SET status = 'completed',
+        updated_at = timezone('utc'::text, now())
+    WHERE id = challenge_id AND status = 'approved';
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+-- Grant execution to public and authenticated
+GRANT EXECUTE ON FUNCTION public.mark_challenge_caught(UUID) TO anon, authenticated;
+

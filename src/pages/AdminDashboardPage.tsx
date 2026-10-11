@@ -89,14 +89,14 @@ export const AdminDashboardPage: React.FC = () => {
       )}
 
       {/* Top Admin Header Bar with prominent PLAY POND button */}
-      <header className="w-full glass-panel border-b border-cyan-500/20 px-4 sm:px-8 py-4 flex items-center justify-between">
+      <header className="w-full glass-panel border-b border-cyan-500/20 px-3 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-cyan-500/20 flex items-center justify-center border border-cyan-400/30">
               <Fish className="w-5 h-5 text-cyan-400" />
             </div>
-            <span className="font-bold text-sm tracking-wide text-white hidden sm:inline">
-              Freshers Fish Pond Console
+            <span className="font-bold text-xs sm:text-sm tracking-wide text-white hidden xs:inline">
+              Fish Pond Console
             </span>
           </Link>
         </div>
@@ -105,17 +105,17 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/pond"
-            className="px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all shadow-md shadow-cyan-500/30 flex items-center gap-2 transform hover:scale-105 active:scale-95"
+            className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 hover:from-cyan-300 hover:to-amber-200 transition-all shadow-md shadow-cyan-500/30 flex items-center gap-1.5 sm:gap-2 transform hover:scale-105 active:scale-95"
           >
             <Fish className="w-4 h-4 stroke-[2.5]" />
             <span>Play Fish Pond</span>
-            <span className="text-base">🎣</span>
+            <span className="text-sm sm:text-base">🎣</span>
           </Link>
         </div>
       </header>
 
       {/* Main Dashboard Container */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-5 sm:py-8 flex-1 flex flex-col lg:flex-row gap-6 lg:gap-8">
         {/* Admin Sidebar */}
         <AdminSidebar
           stats={stats}
@@ -136,25 +136,30 @@ export const AdminDashboardPage: React.FC = () => {
         {/* Dashboard Main Content Area */}
         <main className="flex-1 flex flex-col min-w-0">
           {/* Top Stat Cards Header Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-6">
-            <div className="glass-panel rounded-2xl p-4 border border-cyan-500/20">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total</span>
-              <span className="text-2xl font-black text-white mt-1 block">{stats.total}</span>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3.5 mb-5 sm:mb-6">
+            <div className="glass-panel rounded-2xl p-3 sm:p-4 border border-cyan-500/20">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total</span>
+              <span className="text-xl sm:text-2xl font-black text-white mt-0.5 sm:mt-1 block">{stats.total}</span>
             </div>
 
-            <div className="glass-panel rounded-2xl p-4 border border-amber-500/30">
-              <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider block">Pending</span>
-              <span className="text-2xl font-black text-amber-300 mt-1 block">{stats.pending}</span>
+            <div className="glass-panel rounded-2xl p-3 sm:p-4 border border-amber-500/30">
+              <span className="text-[10px] sm:text-[11px] font-bold text-amber-400 uppercase tracking-wider block">Pending</span>
+              <span className="text-xl sm:text-2xl font-black text-amber-300 mt-0.5 sm:mt-1 block">{stats.pending}</span>
             </div>
 
-            <div className="glass-panel rounded-2xl p-4 border border-emerald-500/30">
-              <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">Approved</span>
-              <span className="text-2xl font-black text-emerald-300 mt-1 block">{stats.approved}</span>
+            <div className="glass-panel rounded-2xl p-3 sm:p-4 border border-emerald-500/30">
+              <span className="text-[10px] sm:text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">In Pond</span>
+              <span className="text-xl sm:text-2xl font-black text-emerald-300 mt-0.5 sm:mt-1 block">{stats.approved}</span>
             </div>
 
-            <div className="glass-panel rounded-2xl p-4 border border-rose-500/30">
-              <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider block">Rejected</span>
-              <span className="text-2xl font-black text-rose-300 mt-1 block">{stats.rejected}</span>
+            <div className="glass-panel rounded-2xl p-3 sm:p-4 border border-cyan-500/30">
+              <span className="text-[10px] sm:text-[11px] font-bold text-cyan-400 uppercase tracking-wider block">Caught</span>
+              <span className="text-xl sm:text-2xl font-black text-cyan-300 mt-0.5 sm:mt-1 block">{stats.completed}</span>
+            </div>
+
+            <div className="glass-panel rounded-2xl p-3 sm:p-4 border border-rose-500/30">
+              <span className="text-[10px] sm:text-[11px] font-bold text-rose-400 uppercase tracking-wider block">Rejected</span>
+              <span className="text-xl sm:text-2xl font-black text-rose-300 mt-0.5 sm:mt-1 block">{stats.rejected}</span>
             </div>
           </div>
 
@@ -230,6 +235,10 @@ export const AdminDashboardPage: React.FC = () => {
                   ? 'No challenges matched your search. Try a different query.'
                   : activeTab === 'pending'
                   ? 'Great job! There are no pending challenges waiting for review.'
+                  : activeTab === 'approved'
+                  ? 'There are no active dares in the pond. Approve pending submissions or re-add caught dares.'
+                  : activeTab === 'completed'
+                  ? 'No dares have been caught on stage yet.'
                   : 'No submissions in this queue yet.'}
               </p>
             </div>
@@ -264,8 +273,8 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* Pagination Footer */}
           {totalPages > 1 && (
-            <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-              <span>
+            <div className="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+              <span className="text-center sm:text-left">
                 Showing {(currentPage - 1) * 8 + 1} to{' '}
                 {Math.min(currentPage * 8, filteredChallenges.length)} of {filteredChallenges.length} challenges
               </span>

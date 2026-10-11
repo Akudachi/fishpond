@@ -117,7 +117,7 @@ export const storageFallback = {
     return newChallenge;
   },
 
-  updateChallengeStatus(id: string, status: 'approved' | 'rejected' | 'pending'): Challenge | null {
+  updateChallengeStatus(id: string, status: 'approved' | 'rejected' | 'pending' | 'completed'): Challenge | null {
     const current = this.getChallenges();
     const index = current.findIndex((c) => c.id === id);
     if (index === -1) return null;
@@ -129,6 +129,10 @@ export const storageFallback = {
     };
     this.saveChallenges(current);
     return current[index];
+  },
+
+  markChallengeCaught(id: string): Challenge | null {
+    return this.updateChallengeStatus(id, 'completed');
   },
 
   updateChallengeText(id: string, text: string): Challenge | null {

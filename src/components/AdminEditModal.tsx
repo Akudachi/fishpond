@@ -49,7 +49,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-      <div className="w-full max-w-lg rounded-2xl glass-panel-glow border border-cyan-500/30 p-6 relative">
+      <div className="w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-2xl glass-panel-glow border border-cyan-500/30 p-5 sm:p-6 relative">
         <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
           <div>
             <h3 className="text-lg font-bold text-white">Edit Challenge Dare</h3>

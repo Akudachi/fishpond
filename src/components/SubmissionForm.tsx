@@ -36,20 +36,20 @@ export const SubmissionForm: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: -20 }}
-            className="glass-panel-glow rounded-3xl p-8 md:p-12 text-center border-2 border-emerald-400/50 shadow-[0_0_50px_rgba(16,185,129,0.3)] relative overflow-hidden"
+            className="glass-panel-glow rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center border-2 border-emerald-400/50 shadow-[0_0_50px_rgba(16,185,129,0.3)] relative overflow-hidden"
           >
             {/* Background glowing particles */}
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/40 mb-6">
-              <CheckCircle className="w-12 h-12 text-slate-950 stroke-[2.5]" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/40 mb-5 sm:mb-6">
+              <CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 text-slate-950 stroke-[2.5]" />
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-wide uppercase mb-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-wide uppercase mb-3">
               YOUR CHALLENGE HAS ENTERED THE POND! 🐟
             </h3>
 
-            <p className="text-slate-300 text-base md:text-lg mb-8 max-w-lg mx-auto">
+            <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-lg mx-auto">
               Thanks for contributing! Your challenge will appear in the game only after admin approval.
             </p>
 
@@ -57,9 +57,9 @@ export const SubmissionForm: React.FC = () => {
             <div className="flex items-center justify-center">
               <button
                 onClick={resetStatus}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-900 bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-slate-900 bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95"
               >
-                <Sparkles className="w-5 h-5 text-slate-950" />
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950" />
                 <span>Submit Another Dare</span>
               </button>
             </div>
@@ -69,17 +69,17 @@ export const SubmissionForm: React.FC = () => {
             key="form-card"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-panel-glow rounded-3xl p-6 sm:p-10 border border-cyan-400/30 shadow-[0_15px_45px_rgba(0,0,0,0.5)]"
+            className="glass-panel-glow rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border border-cyan-400/30 shadow-[0_15px_45px_rgba(0,0,0,0.5)]"
           >
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-bold text-xs uppercase tracking-wider mb-3">
+            <div className="text-center mb-6 sm:mb-8">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-2.5 sm:mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Freshers Day Special</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight">
                 Drop Your Dare Into The Pond!
               </h2>
-              <p className="text-slate-300 text-sm mt-2">
+              <p className="text-slate-300 text-xs sm:text-sm mt-1.5 sm:mt-2">
                 Contribute a funny, creative challenge or dare for freshers to catch during the stage event.
               </p>
             </div>

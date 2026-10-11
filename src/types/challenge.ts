@@ -1,4 +1,5 @@
-export type ChallengeStatus = 'pending' | 'approved' | 'rejected';
+export type ChallengeStatus = 'pending' | 'approved' | 'rejected' | 'completed';
+
 
 export type ChallengeCategory =
   | 'Funny'
